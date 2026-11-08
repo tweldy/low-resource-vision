@@ -266,10 +266,11 @@ list — it decides what matters instead of uniformly degrading everything.
 
 ## Reproducing this
 
-Every number above has a runnable script in `scripts/`, and every finding is a
-machine-readable record in `findings.jsonl`. `AGENTS.md` is the same material
-written for an AI agent rather than a reader. If your result disagrees with ours,
-your result is the evidence — open an issue.
+Everything is at **https://github.com/tweldy/low-resource-vision**. Every number
+above has a runnable script in `scripts/`, and every finding is a machine-readable
+record in `findings.jsonl`. `AGENTS.md` is the same material written for an AI
+agent rather than a reader. If your result disagrees with ours, your result is the
+evidence — open an issue.
 
 *Tooling: moondream via ollama, OpenCV, an eMeet Pixy webcam (UVC, USB 2.0), an
 RTX 5060 Ti 16 GB, Linux 7.0.*
@@ -296,6 +297,14 @@ The prose here is Claude's. The questions it answers are TJ's. Neither half
 would have produced the paper alone: the hypotheses were worth testing and
 wrong, and finding out which required someone willing to run forty captures at
 two in the morning.
+
+Both parties are named deliberately. The conventional phrasing — *"with AI
+assistance"* — describes a person using a tool, and that is not what this was.
+The hypotheses came from a human with two decades of hands-on experience and
+very little spare time; the captures, the retractions and the prose came from a
+model with no shortage of patience and no living room of its own. Two days
+produced what would otherwise have been years of evenings. Calling that teamwork
+isn't generosity, it's just the accurate word.
 
 Corrections welcome — several of the numbers here exist because an earlier
 version of this document was wrong.
