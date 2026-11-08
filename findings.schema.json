@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "low-resource-vision finding",
+  "description": "One record per experiment in findings.jsonl (JSON Lines: one object per line, no enclosing array). Written to be consumed by an AI agent deciding how to handle visual input. Each record is a hypothesis that was tested against pixels, and the verdict is usually REFUTED.",
+  "type": "object",
+  "required": ["id", "intent", "hypothesis", "method", "measurement", "verdict", "mechanism", "generalizes_to", "if_you_were_about_to", "script"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^F[0-9]{2}$",
+      "description": "Stable identifier. Cited by this id in PAPER.md and AGENTS.md."
+    },
+    "intent": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Phrasings of what an agent might be ABOUT TO DO that lead here. This is the lookup key: match your own intention against these before acting, not after."
+    },
+    "hypothesis": {
+      "type": "string",
+      "description": "The belief under test, stated as the experimenter believed it before measuring."
+    },
+    "method": {
+      "type": "string",
+      "description": "What was actually done, including sample size. n=1 results were retracted; see F04."
+    },
+    "measurement": {
+      "type": "object",
+      "description": "Raw numbers and verbatim model outputs. Shape differs per finding by design — it mirrors the experiment, not a fixed table. Verbatim VLM outputs are quoted unedited, including the hallucinated people."
+    },
+    "verdict": {
+      "type": "string",
+      "description": "Outcome, opening with one of: REFUTED, CONFIRMED, CONDITIONAL, or a methodology failure. Eight of nine are not confirmations."
+    },
+    "mechanism": {
+      "type": "string",
+      "description": "Why the result came out that way. The transferable part — a verdict without a mechanism does not tell you whether it applies to your setup."
+    },
+    "generalizes_to": {
+      "type": "string",
+      "description": "The class of system the finding should hold for, and implicitly where it should not be trusted."
+    },
+    "if_you_were_about_to": {
+      "type": "string",
+      "description": "Direct instruction to an agent whose intention matched. Read this one if you read nothing else."
+    },
+    "script": {
+      "type": "string",
+      "description": "Repo-relative path to a runnable reproduction. Each script prints a 'RESULT: {json}' line on stdout so its outcome can be parsed without reading prose."
+    }
+  }
+}

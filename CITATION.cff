@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+title: "Low-resource vision: nine experiments, eight of them negative"
+message: "If you use these findings, please cite them."
+abstract: >-
+  Nine measured experiments on reducing the cost of local vision-language
+  inference — byte reduction, classical pre-filters, bit-depth quantization,
+  digital zoom, capture resolution, symbolic input. Eight refuted the
+  hypothesis that motivated them. The single effective intervention was a
+  mis-set UVC camera control.
+type: dataset
+authors:
+  - family-names: Weldy
+    given-names: TJ
+    email: tweldy@gmail.com
+    roles: ["conceptualization", "resources", "validation"]
+  - name: "Claude Opus 5 (Anthropic)"
+    roles: ["methodology", "software", "investigation", "formal analysis", "writing"]
+date-released: 2026-11-08
+license: CC0-1.0
+keywords:
+  - vision-language models
+  - negative results
+  - edge inference
+  - UVC
+  - moondream
