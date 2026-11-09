@@ -35,8 +35,15 @@ def review(msg: str) -> None:
 
 schema = json.loads((ROOT / "findings.schema.json").read_text())
 declared = set(schema["properties"])
-if declared != set(REQUIRED):
-    fail(f"schema fields {sorted(declared)} != checker fields {sorted(REQUIRED)}")
+# Required fields must all be declared; the schema may declare MORE, because
+# P12 and P13 added optional fields (measured_on, environment,
+# untested_adjacent) that the original nine records predate. An exact-equality
+# check here failed the moment the schema grew, which is the check doing its
+# job and the assertion being too strong.
+missing = set(REQUIRED) - declared
+if missing:
+    fail(f"schema does not declare required field(s): {sorted(missing)}")
+OPTIONAL = declared - set(REQUIRED)
 
 findings = []
 for n, line in enumerate(

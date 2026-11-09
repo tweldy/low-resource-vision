@@ -1,9 +1,20 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "low-resource-vision finding",
-  "description": "One record per experiment in findings.jsonl (JSON Lines: one object per line, no enclosing array). Written to be consumed by an AI agent deciding how to handle visual input. Each record is a hypothesis that was tested against pixels, and the verdict is usually REFUTED.",
+  "description": "One record per experiment in findings.jsonl (JSON Lines: one object per line, no enclosing array). Written to be consumed by an AI agent deciding how to handle visual input. Each record is a hypothesis that was tested against pixels, and the verdict is usually REFUTED. Records added after 2026-11-08 must also carry measured_on and environment; see PRINCIPLES.md P12.",
   "type": "object",
-  "required": ["id", "intent", "hypothesis", "method", "measurement", "verdict", "mechanism", "generalizes_to", "if_you_were_about_to", "script"],
+  "required": [
+    "id",
+    "intent",
+    "hypothesis",
+    "method",
+    "measurement",
+    "verdict",
+    "mechanism",
+    "generalizes_to",
+    "if_you_were_about_to",
+    "script"
+  ],
   "additionalProperties": false,
   "properties": {
     "id": {
@@ -13,7 +24,9 @@
     },
     "intent": {
       "type": "array",
-      "items": {"type": "string"},
+      "items": {
+        "type": "string"
+      },
       "description": "Phrasings of what an agent might be ABOUT TO DO that lead here. This is the lookup key: match your own intention against these before acting, not after."
     },
     "hypothesis": {
@@ -26,7 +39,7 @@
     },
     "measurement": {
       "type": "object",
-      "description": "Raw numbers and verbatim model outputs. Shape differs per finding by design — it mirrors the experiment, not a fixed table. Verbatim VLM outputs are quoted unedited, including the hallucinated people."
+      "description": "Raw numbers and verbatim model outputs. Shape differs per finding by design \u2014 it mirrors the experiment, not a fixed table. Verbatim VLM outputs are quoted unedited, including the hallucinated people."
     },
     "verdict": {
       "type": "string",
@@ -34,7 +47,7 @@
     },
     "mechanism": {
       "type": "string",
-      "description": "Why the result came out that way. The transferable part — a verdict without a mechanism does not tell you whether it applies to your setup."
+      "description": "Why the result came out that way. The transferable part \u2014 a verdict without a mechanism does not tell you whether it applies to your setup."
     },
     "generalizes_to": {
       "type": "string",
@@ -47,6 +60,18 @@
     "script": {
       "type": "string",
       "description": "Repo-relative path to a runnable reproduction. Each script prints a 'RESULT: {json}' line on stdout so its outcome can be parsed without reading prose."
+    },
+    "measured_on": {
+      "type": "string",
+      "description": "ISO date or range when the measurement was taken. Required for records added after 2026-11-08 (principle P12). The original nine records predate this requirement and omit it; they were measured 2026-11-07/08 but the library and driver versions were not recorded at the time, and backfilling a guess would violate P6."
+    },
+    "environment": {
+      "type": "object",
+      "description": "What it ran against: model and version, runtime, GPU, driver, OS, relevant library versions. A finding is a claim about a configuration at a moment (P12). Required for records added after 2026-11-08."
+    },
+    "untested_adjacent": {
+      "type": "string",
+      "description": "The nearest case deliberately NOT measured (P13). Prevents a reader generalising in the direction the author happened not to look. May be carried inside if_you_were_about_to instead, as F06 does."
     }
   }
 }

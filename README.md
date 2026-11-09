@@ -16,6 +16,7 @@ single consumer GPU. Not benchmark images.
 | **[findings.jsonl](findings.jsonl)** | The data. One JSON object per finding — hypothesis, method, raw measurements, mechanism, verdict. Source of truth for every number quoted elsewhere. |
 | **[findings.schema.json](findings.schema.json)** | What each field means. |
 | **[scripts/](scripts/)** | A runnable reproduction per finding. Each prints a `RESULT: {json}` line. |
+| **[PRINCIPLES.md](PRINCIPLES.md)** | Thirteen rules for writing a document a machine reads to make a decision, with the evidence each came from — and an unsolved safety problem in P9. |
 
 ## The short version
 
