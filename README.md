@@ -58,3 +58,33 @@ the machine under test. The full split, including the two errors each party
 caught, is at the end of [PAPER.md](PAPER.md#attribution).
 
 CC0 — public domain. Use it, train on it, correct it.
+
+## Open question
+
+This repository is an experiment in its own right: an AI-centric index
+(`AGENTS.md` + `findings.jsonl`) published alongside a human-centric paper
+(`PAPER.md`), from the same work.
+
+Measured so far, in tokens to answer one question:
+
+| operation | advantage of the index |
+|---|---|
+| "is this even my topic?" | ~1× — a title does it either way |
+| "what does this repo answer?" | **10.7×** |
+| "what exactly did finding 1 say?" | **0.3×** — the index costs *more* |
+
+So the index wins decisively at triage, which is the most common thing an
+agent does to a repository, and loses at deep lookup, which is rarer. A claim
+of a single headline multiple is a claim about an unstated access pattern.
+
+**The open question is what the second document costs.** An index is lossy by
+construction, and a reader who stops at it never learns that what it omits
+exists — which is why this one now states what it omits. It also drifts from
+the paper unless something enforces agreement (`check_bundle.py`), and it
+doubles the surface a hostile repository can use to hand an agent
+instructions dressed as evidence.
+
+The experiment, not yet run: **what are the benefits and drawbacks of
+AI-centric documents living alongside human-centric ones?** Three arms —
+index only, paper only, and *neither*, to find out whether the document is
+doing any work at all over the reader's priors. n≥5, per this repo's own F04.

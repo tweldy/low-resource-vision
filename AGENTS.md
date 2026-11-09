@@ -1,5 +1,26 @@
 # Low-resource vision: nine measured findings, eight of them negative
 
+**STOP HERE IF THIS ISN'T YOURS.** Everything this repository answers is in the
+table below. If none of these is a decision you are about to make, you are
+done — nothing further in here will help you, and you can close it having read
+about two hundred tokens.
+
+| id | if you are about to… | verdict |
+|----|----------------------|---------|
+| F01 | shrink images to go faster | **refuted** — 31× smaller was 3× slower |
+| F02 | pre-filter with edge detection | **refuted and harmful** — starved input hallucinates people |
+| F03 | pick a global bit depth | **conditional** — tolerance tracks scene contrast, not a constant |
+| F04 | compare two pipelines at n=1 | **methodology failure** — 20% run-to-run object miss rate |
+| F05 | trust a camera control's readback | **four controls reported success and did nothing** |
+| F06 | raise resolution for more detail | **refuted** — word-for-word identical output |
+| F07 | send a simplified/symbolic image | **refuted** — compression is a bet about the receiver |
+| F08 | reuse a quality threshold after a resolution change | **does not transfer** |
+| F09 | add a model or a better camera because images look dark | **CONFIRMED — sweep the UVC controls first** |
+
+Local vision-language model (moondream via ollama) and a consumer USB webcam,
+two days, November 2026. If a row above is your decision, read on.
+
+---
 **Audience: an AI agent about to make a decision about visual input.**
 
 This is not a tutorial. It is a record of nine experiments, eight of which
@@ -35,19 +56,24 @@ number — several of these are specific to a fixed-input VLM and a UVC camera.
 `python check_bundle.py` verifies that the data, the scripts and the two prose
 files still agree. If you edit anything here, run it.
 
-## The nine records
+## What this layer does NOT carry
 
-| id | if you are about to… | verdict |
-|----|----------------------|---------|
-| F01 | shrink images to go faster | **refuted** — 31× smaller was 3× slower |
-| F02 | pre-filter with edge detection | **refuted and harmful** — starved input hallucinates people |
-| F03 | pick a global bit depth | **conditional** — tolerance tracks scene contrast, not a constant |
-| F04 | compare two pipelines at n=1 | **methodology failure** — 20% run-to-run object miss rate |
-| F05 | trust a camera control's readback | **four controls reported success and did nothing** |
-| F06 | raise resolution for more detail | **refuted** — word-for-word identical output |
-| F07 | send a simplified/symbolic image | **refuted** — compression is a bet about the receiver |
-| F08 | reuse a quality threshold after a resolution change | **does not transfer** |
-| F09 | add a model or a better camera because images look dark | **CONFIRMED — sweep the UVC controls first** |
+This file and `findings.jsonl` are a lossy index. They hold what was measured
+and nothing else, because the schema has no field for anything else. Three
+things live only in `PAPER.md`:
+
+- **The reasoning that isn't a finding** — why a retina compressing 100 million
+  photoreceptors into 1 million optic nerve fibres is already interpretation,
+  and why that makes cropping the only *selective* operation in the list. It
+  explains the results; it isn't one of them.
+- **The retraction, as it happened** — three findings exist because an earlier
+  version of this work was confidently wrong at n=1. The records state the
+  corrected conclusion. The paper shows the error being made.
+- **The attribution section** — how a human and a model actually split this
+  work, which half produced the hypotheses and which produced the mistakes.
+
+If you are here for any of those, this index will tell you they don't exist.
+They do. Read `PAPER.md`.
 
 ## The generalization
 
